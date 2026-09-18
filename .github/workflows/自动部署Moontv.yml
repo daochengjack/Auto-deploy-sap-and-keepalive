@@ -305,6 +305,9 @@ jobs:
         cf set-env ${{ env.APP_NAME }} REDIS_URL "${{ secrets.REDIS_URL }}"              # redis 连接 url
         cf set-env ${{ env.APP_NAME }} UPSTASH_URL "${{ secrets.UPSTASH_URL }}"          # upstash redis 连接 url
         cf set-env ${{ env.APP_NAME }} UPSTASH_TOKEN "${{ secrets.UPSTASH_TOKEN }}"      # upstash redis 连接 token
+        # 图片代理：必须是可接收 ?url= 参数的图片转发接口，例如 https://your-proxy.example.com/image?url=
+        # MoonTV 会自动对原始图片地址进行 URL 编码后拼接到该地址后面。
+        cf set-env ${{ env.APP_NAME }} NEXT_PUBLIC_IMAGE_PROXY "${{ secrets.NEXT_PUBLIC_IMAGE_PROXY }}"
         cf set-env ${{ env.APP_NAME }} NEXT_PUBLIC_DISABLE_YELLOW_FILTER "${{ secrets.NEXT_PUBLIC_DISABLE_YELLOW_FILTER || 'false'}}" # 是否开启18+,默认开启
         
         # 重启应用
